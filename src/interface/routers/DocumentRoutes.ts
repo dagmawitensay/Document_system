@@ -14,6 +14,6 @@ router.get('/', authentication, (req, res) => documentController.getAll(req, res
 router.get('/:id', authentication, (req, res) => documentController.getDocumentById(req, res))
 router.post('/', authentication, (req, res) => documentController.createDocument(req, res))
 router.put('/:id', authentication, (req, res) => documentController.updateDocument(req, res))
-router.delete('/:id', authentication, (req, res) => documentController.deleteDocument(req, res))
+router.delete('/:id', authentication, isAdmin, (req, res) => documentController.deleteDocument(req, res))
 
 export {router as documentRoutes}

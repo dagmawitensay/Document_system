@@ -31,16 +31,13 @@ export const authentication = (req: RequestWithUserRole, res: Response, next: Ne
     }
 }
 
-const roles: any = {
-    'admin': ['writer', 'reader', 'delete'],
-    'regular_user': ['writer', 'reader']
-}
 
 export const isAdmin = (req: RequestWithUserRole, res: Response, next: NextFunction) => {
     if (!req.user || !req.user.role) {
-        return res
+    res
         .status(401)
         .json({ success: false, message: "Invalid authorization header" });
+        return
     }
     next();
 }
