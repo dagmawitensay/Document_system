@@ -3,23 +3,23 @@ import { Document } from "../domain/entities/Document";
 
 export class DocumentUseCase {
     constructor(private documentRepository: IDocumentRepository) {}
-    async GetAllDocuments() {
-        return this.documentRepository.findAll();
+    async GetAllDocuments(isAdmin: boolean, userId: string) {
+        return await this.documentRepository.findAll(isAdmin, userId);
     }
 
     async GetDocumentByID(id: string) {
-        return this.documentRepository.findByID(id);
+        return await this.documentRepository.findByID(id);
     }
 
     async CreateDocument(document:Document) {
-        return this.documentRepository.create(document)
+        return await this.documentRepository.create(document)
     }
 
-    async UpdateDocument(document: Document) {
-        return this.documentRepository.update(document)
+    async UpdateDocument(document: Document, userId: string, isAdmin: boolean) {
+        return await this.documentRepository.update(document, userId, isAdmin)
     }
 
     async DeleteDocument(id: string) {
-        return this.documentRepository.delete(id)
+        return await this.documentRepository.delete(id)
     }
 }
